@@ -80,6 +80,32 @@ void showContacts(MyStruct c)
 		showContact(c.f[i], c.d[i]);
 	}
 }
+F* findMinStud(F*S, int count)
+{
+	int min = 0;
+
+	for (int i = 1; i < count; i++)
+	{
+		if (strcmp(S[i].n, S[min].n) < 0)
+			min = i;
+	}
+	return &S[min];
+}
+void sortPik(MyStruct* cc)
+{
+	F* cs = cc->f;
+	int n = cc->count;
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			F* min = findMinStud(cs + i, n - i);
+			F tmp = cs[i];
+			cs[i] = *min;
+			*min = tmp;
+		}
+	}
+}
 int main()
 {
 	MyStruct cc= init();
@@ -88,6 +114,12 @@ int main()
 	addS(&cc, createF("qwe"), createD(600));
 	showContacts(cc);
 	removeS(&cc, 0);
+	showContacts(cc);
+	addS(&cc, createF("qe"), createD(630));
+	addS(&cc, createF("adqwe"), createD(6));
+	showContacts(cc);
+
+	sortPik(&cc);
 	showContacts(cc);
 	return 0;
 }
