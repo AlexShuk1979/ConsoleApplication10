@@ -85,7 +85,7 @@ int main()
 	MyStruct cc= init();
 	addS(&cc, createF("dasf"), createD(100));
 	showContacts(cc);
-	addS(&cc, createF("qwe"), createD(60));
+	addS(&cc, createF("qwe"), createD(600));
 	showContacts(cc);
 	removeS(&cc, 0);
 	showContacts(cc);
