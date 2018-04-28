@@ -6,6 +6,7 @@
 #include <string.h>
 #include <locale.h>
 #include<conio.h>
+#include <stdio.h>
 
 
 
@@ -61,14 +62,15 @@ void main()
 		printf("0-выход\n1-добавление записи\n2-сортировка\n3-вывод на экран\n4-удаление записи\n5-редактирование записи\n6-поиск пустого пол€");
 		w = _getch();
 		/*char f[15], i[15], o[15];
-			int an, sum, d, m, y;*/
+			*/
 		switch (w)
 		{
 			
 			system("cls");
 		case '1':
-
-			/*printf("добавление записи\n");
+			int an, sum, d, m, y;
+			char f[15], i[15], o[15];
+			printf("добавление записи\n");
 			printf("введите фамилию\n");
 			gets(f);
 			printf("введите им€\n");
@@ -86,8 +88,8 @@ void main()
 			printf("введите год\n");
 			scanf("%d", &y);
 
-			addContact(&cc, createContact(f, i, o), createDate(d, m, y,an, sum));*/
-			userAdd(cc);
+			addContact(&cc, createContact(f, i, o), createDate(d, m, y,an, sum));
+		//	userAdd(cc);
 			system("cls");
 			showContacts(cc);
 
@@ -110,7 +112,7 @@ void main()
 			showContacts(cc); break;
 		case '5':
 			printf("\nвведите номер измен€емой записи \n");
-			/*int n;
+			int n;
 			scanf("%d", &n);
 			n = n - 1;
 			if (n  < cc.count)
@@ -135,7 +137,7 @@ void main()
 
 			cc.contactsC[n] = createContact(f, i, o);
 			cc.date[n] = createDate(d, m, y,an, sum);
-			system("cls");*/
+			system("cls");
 			showContacts(cc);
 		case 6: break;
 
@@ -156,30 +158,30 @@ FIO createContact(char* q, char* s, char* value)
 	return c;
 }
 
-void userAdd(Contacts cc)
-{
-	char f[15], i[15], o[15];
-	int an, sum, d, m, y;
-	printf("добавление записи\n");
-	printf("введите фамилию\n");
-	gets(f);
-	printf("введите им€\n");
-	gets(i);
-	printf("введите отчество\n");
-	gets(o);
-	printf("введите номер счета\n");
-	scanf("%d", &an);
-	printf("введите сумму\n");
-	scanf("%d", &sum);
-	printf("введите день\n");
-	scanf("%d", &d);
-	printf("введите мес€ц\n");
-	scanf("%d", &m);
-	printf("введите год\n");
-	scanf("%d", &y);
-
-	addContact(&cc, createContact(f, i, o), createDate(d, m, y, an, sum));
-}
+//void userAdd(Contacts cc)
+//{
+//	char f[15], i[15], o[15];
+//	int an, sum, d, m, y;
+//	printf("добавление записи\n");
+//	printf("введите фамилию\n");
+//	gets(f);
+//	printf("введите им€\n");
+//	gets(i);
+//	printf("введите отчество\n");
+//	gets(o);
+//	printf("введите номер счета\n");
+//	scanf("%d", &an);
+//	printf("введите сумму\n");
+//	scanf("%d", &sum);
+//	printf("введите день\n");
+//	scanf("%d", &d);
+//	printf("введите мес€ц\n");
+//	scanf("%d", &m);
+//	printf("введите год\n");
+//	scanf("%d", &y);
+//
+//	addContact(&cc, createContact(f, i, o), createDate(d, m, y, an, sum));
+//}
 Date createDate(int a, int b, int z,int accNum, int sum)
 {
 	Date d;

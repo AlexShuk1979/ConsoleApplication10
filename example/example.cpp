@@ -78,7 +78,9 @@ F* findMinStud(F*S, int count)
 
 	for (int i = 1; i < count; i++)
 	{
-		if (strcmp(S[i].n, S[min].n) < 0)
+		/*if (strcmp(S[i].n, S[min].n) < 0)
+			min = i;*/
+		if (S[i].m< S[min].m)
 			min = i;
 	}
 	return &S[min];
@@ -98,22 +100,48 @@ void sortPik(MyStruct* cc)
 		}
 	}
 }
+void userAdd(MyStruct* c)
+{
+	addS(c, createF(" a", 12, 87));
+}
 
+void modeS(MyStruct* c)
+{
+	printf("\nвведите номер изменяемой записи \n");
+	int n,x,s;
+	F* q = c->f;
+	char p[15];
+	scanf("%d", &n);
+	n = n - 1;
+	if (n  < c->count)
+		showContact(q[n]);
+	scanf("%s", &p);
+	scanf("%d", &x);
+	scanf("%d", &s);
+
+
+	q[n] = createF(p, x, s);
+}
 int main()
 {
+	setlocale(LC_ALL, "Russian");
 	MyStruct cc = init();
 	addS(&cc, createF("dasf", 100,30));
-	showContacts(cc);
 	addS(&cc, createF("bwe",600,33));
 	showContacts(cc);
 //	removeS(&cc, 0);
 	showContacts(cc);
-	addS(&cc, createF("ce", 630,55));
+	addS(&cc, createF("ce", 330,525));
 	addS(&cc, createF("adqwe", 6,5));
 	showContacts(cc);
 
 	sortPik(&cc);
 	showContacts(cc);
+	userAdd(&cc);
+	showContacts(cc);
+	modeS(&cc);
+	showContacts(cc);
+
 		_getch();
 return 0;
  }
