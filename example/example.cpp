@@ -9,42 +9,34 @@
 struct F
 {
 	char* n;
+	int d,m;
 };
-struct D
-{
-	int d;
-};
+
 struct MyStruct
 {
 	F* f;
-	D* d;
 	int count;
 };
-F createF(char *v)
+F createF(char *v,int a,int b)
 {
 	F c;
 	c.n = (char*)malloc(strlen(v) + 1);
 	strcpy(c.n, v);
+	c.d = a;
+	c.m = b;
 	return c;
 }
-D createD(int v)
-{
-	D c;
-	c.d = v;
-	return c;
-}
+
 
 MyStruct init()
 {
-	return{ NULL,NULL,0 };
+	return{ NULL,0 };
 }
-void addS(MyStruct* m, F f, D d)
+void addS(MyStruct* m, F f)
 {
 	m->f = (F*)realloc(m->f, (m->count + 1) * sizeof(f));
-	m->d = (D*)realloc(m->d, (m->count + 1) * sizeof(d));
 
 	m->f[m->count] = f;
-	m->d[m->count] = d;
 
 	m->count++;
 
@@ -67,9 +59,9 @@ void removeS(MyStruct* a, int i)
 
 	a->count--;
 }
-void showContact(F c, D d)
+void showContact(F c)
 {
-	printf("%12s     %10d\n", c.n, d.d);
+	printf("%12s     %10d %3d\n", c.n, c.d, c.m);
 
 }
 void showContacts(MyStruct c)
@@ -77,7 +69,7 @@ void showContacts(MyStruct c)
 	for (int i = 0; i < c.count; i++)
 	{
 		printf("%d. ", i + 1);
-		showContact(c.f[i], c.d[i]);
+		showContact(c.f[i]);
 	}
 }
 F* findMinStud(F*S, int count)
@@ -106,21 +98,23 @@ void sortPik(MyStruct* cc)
 		}
 	}
 }
+
 int main()
 {
-	MyStruct cc= init();
-	addS(&cc, createF("dasf"), createD(100));
+	MyStruct cc = init();
+	addS(&cc, createF("dasf", 100,30));
 	showContacts(cc);
-	addS(&cc, createF("qwe"), createD(600));
+	addS(&cc, createF("bwe",600,33));
 	showContacts(cc);
-	removeS(&cc, 0);
+//	removeS(&cc, 0);
 	showContacts(cc);
-	addS(&cc, createF("qe"), createD(630));
-	addS(&cc, createF("adqwe"), createD(6));
+	addS(&cc, createF("ce", 630,55));
+	addS(&cc, createF("adqwe", 6,5));
 	showContacts(cc);
 
 	sortPik(&cc);
 	showContacts(cc);
-	return 0;
-}
+		_getch();
+return 0;
+ }
 
