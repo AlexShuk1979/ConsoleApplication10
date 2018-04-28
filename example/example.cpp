@@ -53,6 +53,8 @@ void removeS(MyStruct* a, int i)
 	{
 		return;
 	}
+	if (a->count == 0)
+		return;
 	deleteS(a->f[i]);
 	for (int j = i; j < a->count - 1; j++)
 		a->f[j] = a->f[j + 1];
@@ -144,25 +146,50 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 	MyStruct cc = init();
-	userAdd(&cc);
-
+//	
 	addS(&cc, createF("", NULL,30));
 	addS(&cc, createF("",0,33));
-	showContacts(cc);
-//	removeS(&cc, 0);
-	showContacts(cc);
 	addS(&cc, createF("ce", 330,525));
 	addS(&cc, createF("adqwe", 6,5));
 	showContacts(cc);
 
-	sortPik(&cc);
-	showContacts(cc);
-	showContacts(cc);
-	modeS(&cc);
-	showContacts(cc);
-	findF(cc, 0);
-
-		_getch();
+	char key;
+	do {
+		printf("0-выход\n1-добавление записи\n2-сортировка\n3-вывод на экран\n4-удаление записи\n5-редактирование записи\n6-поиск пустого поля");
+		key = _getch();
+		switch (key)
+		{
+			
+		case'1':
+			system("cls");
+			userAdd(&cc);
+			showContacts(cc);
+			break;
+		case'2':
+			system("cls");
+			sortPik(&cc);	
+			showContacts(cc);
+			break;
+		case'3':
+			system("cls");
+			showContacts(cc);
+			break;
+		case'4':
+			system("cls");
+			removeS(&cc, 0);
+			showContacts(cc);
+			break;
+		case'5':
+			system("cls");
+			modeS(&cc);
+			showContacts(cc);
+			break;
+		case'6':
+			system("cls");
+			findF(cc, 0);
+			break;
+		}
+		} while (key != '0');
 return 0;
  }
 
