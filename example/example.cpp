@@ -102,7 +102,13 @@ void sortPik(MyStruct* cc)
 }
 void userAdd(MyStruct* c)
 {
-	addS(c, createF(" a", 12, 87));
+	int n, x, s;
+	F* q = c->f;
+	char p[15];
+	scanf("%s", &p);
+	scanf("%d", &x);
+	scanf("%d", &s);
+	addS(c, createF(p, x, s));
 }
 
 void modeS(MyStruct* c)
@@ -122,12 +128,26 @@ void modeS(MyStruct* c)
 
 	q[n] = createF(p, x, s);
 }
+void findF(MyStruct c,int n)
+{
+	F *q = c.f;
+	for (int i = 0; i < c.count; i++)
+		if (q[i].d == 0)
+		{
+			printf("%d. ", i + 1);
+
+			showContact(q[i]);
+		}
+
+}
 int main()
 {
 	setlocale(LC_ALL, "Russian");
 	MyStruct cc = init();
-	addS(&cc, createF("dasf", 100,30));
-	addS(&cc, createF("bwe",600,33));
+	userAdd(&cc);
+
+	addS(&cc, createF("", NULL,30));
+	addS(&cc, createF("",0,33));
 	showContacts(cc);
 //	removeS(&cc, 0);
 	showContacts(cc);
@@ -137,10 +157,10 @@ int main()
 
 	sortPik(&cc);
 	showContacts(cc);
-	userAdd(&cc);
 	showContacts(cc);
 	modeS(&cc);
 	showContacts(cc);
+	findF(cc, 0);
 
 		_getch();
 return 0;
