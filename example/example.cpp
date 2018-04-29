@@ -85,6 +85,7 @@ void showContacts(MyStruct c)
 		printf("Нет записей!\n");
 		return;
 	}
+	printf("№       Фамилия:                Имя:              Отчество:   День Месяц Год  Номер счета       Сумма\n\n");
 	for (int i = 0; i < c.count; i++)
 	{
 		printf("%d. ", i + 1);
@@ -94,7 +95,7 @@ void showContacts(MyStruct c)
 int field() 
 {
 	int w;
-	printf("\  n1-фамилия      4-число   7-номер счета\n  2-имя          5-месяц   8-сумма\n  3-отчество     6-год   \n");
+	printf("\n  1-фамилия      4-число   7-номер счета\n  2-имя          5-месяц   8-сумма\n  3-отчество     6-год   \n");
 	scanf("%d",&w);
 	return w;
 }
@@ -273,7 +274,7 @@ void findF(MyStruct c,int n)
 	{
 	case 1:
 		for (int i = 0; i < c.count; i++)
-		if (q[i].firstName == NULL)
+		if (q[i].firstName == "")
 		{
 			printf("%d. ", i + 1);
 			showContact(q[i]);
@@ -281,7 +282,7 @@ void findF(MyStruct c,int n)
 		break;
 	case 2:
 		for (int i = 0; i < c.count; i++)
-			if (q[i].patronymic == NULL)
+			if (q[i].patronymic == "")
 			{
 				printf("%d. ", i + 1);
 				showContact(q[i]);
@@ -289,7 +290,7 @@ void findF(MyStruct c,int n)
 		break;
 	case 3:
 		for (int i = 0; i < c.count; i++)
-			if (q[i].lastName == NULL)
+			if (q[i].lastName == '\0')
 			{
 				printf("%d. ", i + 1);
 				showContact(q[i]);
@@ -335,6 +336,14 @@ void findF(MyStruct c,int n)
 				showContact(q[i]);
 			}
 		break;
+	case 9:
+		for (int i = 0; i < c.count; i++)
+			if (q[i].summa == NULL||q[i].accNum==NULL||q[i].dd==NULL||q[i].mm == NULL||q[i].yy == NULL)
+			{
+				printf("%d. ", i + 1);
+				showContact(q[i]);
+			}
+		break;
 	default:
 		printf("\nневерно выбрано поле!");
 		break;
@@ -348,6 +357,8 @@ int main()
 	addS(&cc, createData("Egorova", "Dina", "Vital'evna", 21, 10, 2017, 8686886, 50400));
 	addS(&cc, createData("Voronin", "Il'ya", "Aleksandrovich", 10, 03, 0, 45675432, 20500));
 	addS(&cc, createData("Kasakov", "Andrey", "Andreevich", 03, 07, 2018, 2455245, 15600));
+	addS(&cc,createData("Anisimova", " ", "Ivanovna",03, 07, 2018, 2455245, 15600));
+	addS(&cc, createData("Ivanov", "Petr", "Egorovich", 20, 12, 2005, 0, 154506));
 	showContacts(cc);
 
 	char key;
