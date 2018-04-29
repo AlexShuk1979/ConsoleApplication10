@@ -95,8 +95,8 @@ void showContacts(MyStruct c)
 int field() 
 {
 	int w;
-	printf("\n  1-фамили€      4-число   7-номер счета\n  2-им€          5-мес€ц   8-сумма\n  3-отчество     6-год   \n");
-	scanf("%d",&w);
+	printf("\n  1-фамили€      4-число   7-номер счета\n  2-им€          5-мес€ц   8-сумма\n  3-отчество     6-год     9-поиск во всех пол€х\n");
+	scanf("\n%d",&w);
 	return w;
 }
 Data* findMin(Data*S, int count,int key)
@@ -145,7 +145,6 @@ Data* findMin(Data*S, int count,int key)
 				min = i;
 		break;
 	default:
-		printf("неверно выбрано поле");
 		break;
 	}
 	return &S[min];
@@ -274,7 +273,7 @@ void findF(MyStruct c,int n)
 	{
 	case 1:
 		for (int i = 0; i < c.count; i++)
-		if (q[i].firstName == "")
+		if (!strlen(q[i].firstName))
 		{
 			printf("%d. ", i + 1);
 			showContact(q[i]);
@@ -282,7 +281,7 @@ void findF(MyStruct c,int n)
 		break;
 	case 2:
 		for (int i = 0; i < c.count; i++)
-			if (q[i].patronymic == "")
+			if (!strlen(q[i].patronymic))
 			{
 				printf("%d. ", i + 1);
 				showContact(q[i]);
@@ -290,7 +289,7 @@ void findF(MyStruct c,int n)
 		break;
 	case 3:
 		for (int i = 0; i < c.count; i++)
-			if (q[i].lastName == '\0')
+			if (!strlen(q[i].lastName))
 			{
 				printf("%d. ", i + 1);
 				showContact(q[i]);
@@ -338,7 +337,7 @@ void findF(MyStruct c,int n)
 		break;
 	case 9:
 		for (int i = 0; i < c.count; i++)
-			if (q[i].summa == NULL||q[i].accNum==NULL||q[i].dd==NULL||q[i].mm == NULL||q[i].yy == NULL)
+			if (q[i].summa == NULL||q[i].accNum==NULL||q[i].dd==NULL||q[i].mm == NULL||q[i].yy == NULL|| !strlen(q[i].lastName)|| !strlen(q[i].patronymic)|| !strlen(q[i].firstName))
 			{
 				printf("%d. ", i + 1);
 				showContact(q[i]);
@@ -353,11 +352,11 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 	MyStruct cc = init();
-	addS(&cc, createData("Petrov", "Ruslan", "Fedorovich", 2, 05, 2018, 2455245, 22500));
+	addS(&cc, createData("", "Ruslan", "Fedorovich", 2, 05, 2018, 2455245, 22500));
 	addS(&cc, createData("Egorova", "Dina", "Vital'evna", 21, 10, 2017, 8686886, 50400));
 	addS(&cc, createData("Voronin", "Il'ya", "Aleksandrovich", 10, 03, 0, 45675432, 20500));
 	addS(&cc, createData("Kasakov", "Andrey", "Andreevich", 03, 07, 2018, 2455245, 15600));
-	addS(&cc,createData("Anisimova", " ", "Ivanovna",03, 07, 2018, 2455245, 15600));
+	addS(&cc,createData("Anisimova", "", "Ivanovna",03, 07, 2018, 2455245, 15600));
 	addS(&cc, createData("Ivanov", "Petr", "Egorovich", 20, 12, 2005, 0, 154506));
 	showContacts(cc);
 
