@@ -41,22 +41,6 @@ MyStruct init()
 {
 	return{ NULL,0 };
 }
-char* inChar()
-{
-	char *q;
-	printf("введите данные: ");
-	char p[15];
-	scanf("%s", &p);
-	q = (char*)malloc(strlen(p) + 1);
-	strcpy(q, p);
-	return q;
-}
-int inDig()
-{
-	int d;
-	scanf("%d", &d);
-	return d;
-}
 
 void addS(MyStruct* m, Data f)
 {
@@ -107,16 +91,61 @@ void showContacts(MyStruct c)
 		showContact(c.data[i]);
 	}
 }
-Data* findMinStud(Data*S, int count)
+int field() 
+{
+	int w;
+	printf("\n1-фамили€\n2-им€\n3-отчество\n4-число\n5-мес€ц\n6-год\n7-номер счета\n8-сумма\n");
+	scanf("%d",&w);
+	return w;
+}
+Data* findMin(Data*S, int count,int key)
 {
 	int min = 0;
-
-	for (int i = 1; i < count; i++)
+	switch (key)
 	{
-		/*if (strcmp(S[i].n, S[min].n) < 0)
-			min = i;*/
-		if (S[i].mm< S[min].mm)
-			min = i;
+	case 1:
+		for (int i = 1; i < count; i++)
+			if (strcmp(S[i].firstName, S[min].firstName) < 0)
+				min = i;	
+		break;
+	case 3:
+		for (int i = 1; i < count; i++)
+			if (strcmp(S[i].lastName, S[min].lastName) < 0)
+				min = i;
+		break;
+	case 2:
+		for (int i = 1; i < count; i++)
+			if (strcmp(S[i].patronymic, S[min].patronymic) < 0)
+				min = i;
+		break;
+	case 4:
+		for (int i = 1; i < count; i++)
+			if (S[i].dd< S[min].dd)
+				min = i;
+		break;
+	case 5:
+		for (int i = 1; i < count; i++)
+			if (S[i].mm< S[min].mm)
+				min = i;
+		break;
+	case 6:
+		for (int i = 1; i < count; i++)
+			if (S[i].yy< S[min].yy)
+				min = i;
+		break;
+	case 7:
+		for (int i = 1; i < count; i++)
+			if (S[i].accNum< S[min].accNum)
+				min = i;
+		break;
+	case 8:
+		for (int i = 1; i < count; i++)
+			if (S[i].summa<S[min].summa)
+				min = i;
+		break;
+	default:
+		printf("неверно выбрано поле");
+		break;
 	}
 	return &S[min];
 }
@@ -126,13 +155,15 @@ void sortPik(MyStruct* cc)
 	{
 		return;
 	}
+	printf("\nвыберите столбец дл€ сортировки");
+	int key = field();
 	Data* cs = cc->data;
 	int n = cc->count;
 	for (int i = 0; i < n - 1; i++)
 	{
 		for (int j = i + 1; j < n; j++)
 		{
-			Data* min = findMinStud(cs + i, n - i);
+			Data* min = findMin(cs + i, n - i,key);
 			Data tmp = cs[i];
 			cs[i] = *min;
 			*min = tmp;
@@ -141,8 +172,26 @@ void sortPik(MyStruct* cc)
 }
 void userAdd(MyStruct* c)
 {
-	int n, x=3, s=5;
-	addS(c, createData(inChar(), inChar(),inChar(),x,s,x, x, s));
+	int an, sum, d, m, y;
+	char f[15], i[15], o[15];
+	printf("добавление записи\n");
+	printf("введите фамилию\n");
+	scanf("%s",f);
+	printf("введите им€\n");
+	scanf("%s", i);
+	printf("введите отчество\n");
+	scanf("%s", o);
+	printf("введите день\n");
+	scanf("%d", &d);
+	printf("введите мес€ц\n");
+	scanf("%d", &m);
+	printf("введите год\n");
+	scanf("%d", &y);
+	printf("введите номер счета\n");
+	scanf("%d", &an);
+	printf("введите сумму\n");
+	scanf("%d", &sum);
+	addS(c, createData(f, i,o,d,m,y, an, sum));
 }
 
 void modeS(MyStruct* c,int n)
