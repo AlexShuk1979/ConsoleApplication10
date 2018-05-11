@@ -73,11 +73,17 @@ void removeS(MyStruct* a, int i)
 
 	a->count--;
 }
+void showQ()
+{
+	printf("№       Фамилия:                Имя:              Отчество:   День Месяц Год  Номер счета       Сумма\n\n");
+}
+
 void showContact(Data c)
 {
 	printf("%12s       %14s         %15s    %2d  %2d  %4d  %11d  %10d\n", c.firstName, c.patronymic, c.lastName, c.dd, c.mm, c.yy, c.accNum, c.summa);
 
 }
+
 void showContacts(MyStruct c)
 {
 	if (c.count == 0)
@@ -85,7 +91,7 @@ void showContacts(MyStruct c)
 		printf("Нет записей!\n");
 		return;
 	}
-	printf("№       Фамилия:                Имя:              Отчество:   День Месяц Год  Номер счета       Сумма\n\n");
+	showQ();
 	for (int i = 0; i < c.count; i++)
 	{
 		printf("%d. ", i + 1);
@@ -203,6 +209,7 @@ void modeS(MyStruct* c,int n)
 char w;
 Data* q = c->data;
 	system("cls");
+	showQ();
 	printf("\n%d. ", n+1);
 	showContact(q[n]);
 	printf("\n___________________________________________________________________________________\n");
@@ -254,12 +261,13 @@ Data* q = c->data;
 		scanf("%d", &y);
 		break;
 	default:
-		printf("Такого поля не существует!");
+		system("cls");
+		printf("Такого поля не существует!\n\n");
 		break;
 	}
 	q[n] = createData(f, l, p,d,m,y,an,sum);
 }
-void findF(MyStruct c,int n)
+void findF(MyStruct c)
 {
 	if (c.count == 0)
 	{
@@ -269,6 +277,8 @@ void findF(MyStruct c,int n)
 	Data *q = c.data;
 	printf("\nвыберите столбец для поиска пустого значения\n");
 	int key = field();
+	system("cls");
+	showQ();
 	switch (key)
 	{
 	case 1:
@@ -405,7 +415,7 @@ int main()
 			break;
 		case'6':
 			system("cls");
-			findF(cc, 0);
+			findF(cc);
 			break;
 		}
 		} while (key != '0');
